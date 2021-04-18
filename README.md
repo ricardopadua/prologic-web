@@ -20,9 +20,9 @@ Follow these steps and quickly your application will be running, remember the pu
 
 ### Prerequisites
 * Npm
-  ```sh
-  npm install -g typescript @vue/cli
-  ```
+```sh
+npm install -g typescript @vue/cli
+```
 
 ### Installation
 
