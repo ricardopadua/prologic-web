@@ -1,0 +1,13 @@
+version: '3.4'
+services:
+  prologic-web:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        env: prd
+    # HASH_DATETIME=`exec date +%d%m%Y%H%M%S` docker-compose up --build -d
+    container_name: prologic-web-${HASH_DATETIME}
+    ports:
+      - "80:80"
+
