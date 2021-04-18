@@ -27,17 +27,17 @@ Follow these steps and quickly your application will be running, remember the pu
 ### Installation
 
 1. Clone the repo
-   ```sh
-   git clone https://github.com/ricardopadua/prologic-web.git
-   ```
+```sh
+git clone https://github.com/ricardopadua/prologic-web.git
+```
 2. Install NPM packages
-   ```sh
-   npm install
-   ```
+```sh
+npm install
+```
 3. Compiles and hot-reloads for development
-   ```sh
-   npm run serve
-   ```
+```sh
+npm run serve
+```
 
 4. Compiles and minifies for production
 ```sh
