@@ -1,6 +1,8 @@
 import VueRouter, {
   createRouter, createWebHistory, RouteRecordRaw, NavigationGuard,
 } from 'vue-router';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 
 export const defaultRoutes: Array<RouteRecordRaw> = [
   {
@@ -15,6 +17,24 @@ export const defaultRoutes: Array<RouteRecordRaw> = [
     component: () => import('@/views/modules/Sample/About'),
     meta: { title: 'About' },
   },
+  {
+    name: 'Sign in',
+    path: '/signin',
+    component: () => import('@/views/modules/Sample/About'),
+    meta: { title: 'Sign in' },
+  },
+  {
+    name: 'Sign up',
+    path: '/signup',
+    component: () => import('@/views/modules/Sample/About'),
+    meta: { title: 'Sign up' },
+  },
+  {
+    name: 'Forgot my password',
+    path: '/forgotmypassword',
+    component: () => import('@/views/modules/Sample/About'),
+    meta: { title: 'Forgot my password' },
+  },
 ];
 
 const router = createRouter({
@@ -23,16 +43,21 @@ const router = createRouter({
 });
 
 router.beforeResolve((to, from, next) => {
-  const lastMatched = to.matched[to.matched.length - 1];
-  const baseTitle = 'Vue Vuetify Template';
+  const loginPage = ['/signin', '/forgotmypassword', '/signup']
 
-  if (typeof lastMatched.meta.title === 'string') {
-    document.title = `${lastMatched.meta.title} - ${baseTitle}`;
-  } else {
-    document.title = baseTitle;
+  const authRequired1 = !loginPage.includes(to.path)
+  const loggedIn = localStorage.getItem('token')
+
+  if (authRequired1 && !loggedIn) {
+    return next('/login')
   }
+  NProgress.start();
+  next()
+})
 
-  next();
+
+router.afterEach((to, from) => {
+  NProgress.done();
 });
 
 export default router;
