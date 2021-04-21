@@ -49,7 +49,7 @@ router.beforeResolve((to, from, next) => {
   const loggedIn = localStorage.getItem('token')
 
   if (authRequired1 && !loggedIn) {
-    return next('/login')
+    return next('/signin')
   }
   NProgress.start();
   next()
