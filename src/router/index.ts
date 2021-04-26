@@ -1,5 +1,5 @@
-import VueRouter, {
-  createRouter, createWebHistory, RouteRecordRaw, NavigationGuard,
+import {
+  createRouter, createWebHistory, RouteRecordRaw,
 } from 'vue-router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
@@ -32,7 +32,7 @@ export const defaultRoutes: Array<RouteRecordRaw> = [
   {
     name: 'Forgot my password',
     path: '/forgotmypassword',
-    component: () => import('@/views/modules/Sample/About'),
+    component: () => import('@/views/user/SignIn'),
     meta: { title: 'Forgot my password' },
   },
 ];
@@ -43,18 +43,17 @@ const router = createRouter({
 });
 
 router.beforeResolve((to, from, next) => {
-  const loginPage = ['/signin', '/forgotmypassword', '/signup']
+  const loginPage = ['/signin', '/forgotmypassword', '/signup'];
 
-  const authRequired1 = !loginPage.includes(to.path)
-  const loggedIn = localStorage.getItem('token')
+  const authRequired1 = !loginPage.includes(to.path);
+  const loggedIn = localStorage.getItem('token');
 
   if (authRequired1 && !loggedIn) {
-    return next('/signin')
+    return next('/signin');
   }
   NProgress.start();
-  next()
-})
-
+  return next();
+});
 
 router.afterEach((to, from) => {
   NProgress.done();
